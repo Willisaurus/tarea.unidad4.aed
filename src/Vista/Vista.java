@@ -25,7 +25,7 @@ public class Vista
         System.out.println(CYAN + "==============================" + RESET);
         System.out.println(CYAN + "==============================" + RESET);
         System.out.println(AZUL + "     MENU DE OPCIONES    " + RESET);
-        System.out.println(BLANCO_BRILLANTE  + " [1]. Generar matriz aleatoria\n      de números, de 1000 x 1000" + RESET);
+        System.out.println(BLANCO_BRILLANTE  + " [1]. Generar matriz aleatoria de 1000 x 1000" + RESET);
         System.out.println(BLANCO_BRILLANTE + " [2]. Ordenamiento con Merge Sort" + RESET);
         System.out.println(BLANCO_BRILLANTE  + " [3]. Ordenamiento con Shell Sort" + RESET);
         System.out.println(BLANCO_BRILLANTE  + " [4]. Ordenamiento con Counting Sort" + RESET);

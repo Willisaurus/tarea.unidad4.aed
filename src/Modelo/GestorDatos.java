@@ -51,5 +51,4 @@ public class GestorDatos
         return datosGenerados;
     }
 
-
 }

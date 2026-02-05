@@ -39,7 +39,7 @@ public class Controlador
             return;
         }
 
-        long inicio, fin;
+        long inicio, fin, inicioOrden, finOrden;
         int[] arrTrabajo;
 
         switch(opcion)
@@ -81,7 +81,41 @@ public class Controlador
                 System.out.println(Vista.VERDE + "Tiempo Radix Sort: " + (fin - inicio) + " ns" + Vista.RESET);
                 break;
             case 6:
+                System.out.print("Ingrese número a buscar: ");
+                try {
+                    int x = Integer.parseInt(sc.nextLine());
 
+                    System.out.println("Preparando datos (Ordenando con Merge Sort)...");
+
+                    arrTrabajo = modelo.getCopiaArreglo();
+                    inicioOrden = System.nanoTime();
+                    AlgoritmosDeOrdenamiento.mergeSort(arrTrabajo);
+                    finOrden = System.nanoTime();
+                    long tiempoOrdenamiento = finOrden - inicioOrden;
+
+                    System.out.println("Realizando busqueda...");
+                    inicio = System.nanoTime();
+                    int idx_positivo = AlgoritmosDeBusqueda.busquedaBinaria(arrTrabajo, x);
+                    int idx_negativo = AlgoritmosDeBusqueda.busquedaBinaria(arrTrabajo, -x);
+                    fin = System.nanoTime();
+                    long tiempoBusqueda = fin - inicio;
+
+                    System.out.println(Vista.CYAN + "Resultado para " + x + ": " + Vista.RESET +
+                            (idx_positivo != -1 ? Vista.VERDE + "Encontrado en índice " + idx_positivo : Vista.ROJO + "No encontrado") + Vista.RESET);
+                    System.out.println(Vista.CYAN + "Resultado para " + (-x) + ": " + Vista.RESET +
+                            (idx_negativo != -1 ? Vista.VERDE + "Encontrado en índice " + idx_negativo : Vista.ROJO + "No encontrado") + Vista.RESET);
+
+                    // TIEMPOS DESGLOSADOS
+                    System.out.println("\n" + Vista.CYAN + "═══════════════════════════════════════" + Vista.RESET);
+                    System.out.println(Vista.AMARILLO + "  Tiempo Ordenamiento (Merge Sort): " + tiempoOrdenamiento + " ns" + Vista.RESET);
+                    System.out.println(Vista.AMARILLO + "  Tiempo Búsqueda Binaria:          " + tiempoBusqueda + " ns" + Vista.RESET);
+                    System.out.println(Vista.CYAN + "───────────────────────────────────────" + Vista.RESET);
+                    System.out.println(Vista.VERDE + "  TIEMPO TOTAL:                      " + (tiempoOrdenamiento + tiempoBusqueda) + " ns" + Vista.RESET);
+                    System.out.println(Vista.CYAN + "═══════════════════════════════════════" + Vista.RESET);
+                }catch (Exception e)
+                {
+                    System.out.println(Vista.ROJO + "Entrada inválida." + Vista.RESET);
+                }
                 break;
             case 7:
                 System.out.print("Ingrese número a buscar: ");
@@ -96,34 +130,43 @@ public class Controlador
                     if(idx != -1) System.out.println(Vista.VERDE + "Encontrado en índice: " + idx + Vista.RESET);
                     else System.out.println(Vista.ROJO + "No encontrado." + Vista.RESET);
                     System.out.println(Vista.CYAN + "Tiempo Búsqueda Secuencial: " + (fin - inicio) + " ns" + Vista.RESET);
-                } catch(Exception e) { System.out.println("Entrada inválida."); }
+                } catch(Exception e) { System.out.println(Vista.ROJO + "Entrada inválida." + Vista.RESET); }
                 break;
            case 8:
                System.out.print("Ingrese número a buscar: ");
                try {
                    int x = Integer.parseInt(sc.nextLine());
 
-                   System.out.println("Preparando datos (ordenando)...");
+                   System.out.println("Preparando datos (ordenando con Merge Sort)...");
                    arrTrabajo = modelo.getCopiaArreglo();
+                   inicioOrden = System.nanoTime();
                    AlgoritmosDeOrdenamiento.mergeSort(arrTrabajo);
+                   finOrden = System.nanoTime();
+                   long tiempoOrdenamiento = finOrden - inicioOrden;
 
                    System.out.println("Buscando...");
                    inicio = System.nanoTime();
-                   int idx = (opcion == 6)
-                           ? AlgoritmosDeBusqueda.busquedaBinaria(arrTrabajo, x)
-                           : AlgoritmosDeBusqueda.busquedaPorInterpolacion(arrTrabajo, x);
+                   int idx =  AlgoritmosDeBusqueda.busquedaPorInterpolacion(arrTrabajo, x);
                    fin = System.nanoTime();
+                   long tiempoBusqueda = fin - inicio;
 
                    if(idx != -1) System.out.println(Vista.VERDE + "Encontrado en índice: " + idx + Vista.RESET);
                    else System.out.println(Vista.ROJO + "No encontrado." + Vista.RESET);
-                   System.out.println(Vista.CYAN + "Tiempo Búsqueda: " + (fin - inicio) + " ns" + Vista.RESET);
 
-               } catch(Exception e) { System.out.println("Entrada inválida."); }
+                   // TIEMPOS DESGLOSADOS
+                   System.out.println("\n" + Vista.CYAN + "═══════════════════════════════════════" + Vista.RESET);
+                   System.out.println(Vista.AMARILLO + "  Tiempo Ordenamiento (Merge Sort): " + tiempoOrdenamiento + " ns" + Vista.RESET);
+                   System.out.println(Vista.AMARILLO + "  Tiempo Búsqueda Interpolación:    " + tiempoBusqueda + " ns" + Vista.RESET);
+                   System.out.println(Vista.CYAN + "───────────────────────────────────────" + Vista.RESET);
+                   System.out.println(Vista.VERDE + "  TIEMPO TOTAL:                      " + (tiempoOrdenamiento + tiempoBusqueda) + " ns" + Vista.RESET);
+                   System.out.println(Vista.CYAN + "═══════════════════════════════════════" + Vista.RESET);
+               } catch(Exception e) { System.out.println(Vista.ROJO + "Entrada inválida." + Vista.RESET); }
                break;
            case 9:
                System.out.println("Gracias por usar el programa!!");
+               break;
             default:
-                System.out.println("Opción no válida.");
+                System.out.println(Vista.ROJO + "Opción no válida." + Vista.RESET);
 
         }
     }

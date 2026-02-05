@@ -31,13 +31,13 @@ public class AlgoritmosDeOrdenamiento
         int leftArray[] = new int [n1];
         int rightArray[] = new int [n2];
 
-        for (i=0; i < n1; i++)
+        for (int tempI=0; tempI < n1; tempI++)
         {
-            leftArray[i] = arr[left+i];
+            leftArray[tempI] = arr[left+tempI];
         }
-        for (j=0; i < n2; j++)
+        for (int tempJ=0; tempJ < n2; tempJ++)
         {
-            rightArray[j] = arr[middle + j + 1];
+            rightArray[tempJ] = arr[middle + tempJ + 1];
         }
 
         int k = left;
