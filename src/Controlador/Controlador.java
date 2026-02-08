@@ -33,6 +33,7 @@ public class Controlador
 
     private void ejecutarOpcion(int opcion)
     {
+        //Control de ingreso de opcion correcta y verificar que se haya generado un arreglo
         if (opcion != 1 && opcion != 9 && !modelo.hayDatos())
         {
             System.out.println(Vista.ROJO + "Error: Primero genere la matriz (Opción 1)." + Vista.RESET);

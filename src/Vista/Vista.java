@@ -16,7 +16,6 @@ public class Vista
     public static final String AMARILLO = "\u001B[33m";
     public static final String AZUL = "\u001B[34m";
     public static final String CYAN = "\u001B[36m";
-    public static final String PURPURA = "\u001B[35m";
     public static final String BLANCO_BRILLANTE = "\u001B[97m";
 
     public static void menuInicial()
